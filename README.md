@@ -28,12 +28,12 @@ Examples:
 * *missing latitude* - Line is missing latitude value.
 * *missing longitude* - Line is missing longitude value.
 
-When application fails to read input file, it just exits.
+When application fails to read input file, it exits.
 
-When application reads a line that it can't process, it skips it proceeds to the next line.
+When application reads a line that it can't process, it skips and proceeds to the next line.
 
 If any of the errors above occurs, application writes an error message to the console. It also
-displays the erroneous line, so it can be corrected.
+displays the erroneous line so it can be corrected.
 
 **Other notes:**
 1) Since heartbeat is not an actual strike, application does not print anything even when it matches an asset.
@@ -43,7 +43,7 @@ displays the erroneous line, so it can be corrected.
 **Answers to questions:**
 
 **1) What is the time complexity for determining if a strike has occurred for a particular asset?**
-*[bob] O(n) where n is the number of known strikes.*
+*O(n). It depends on the number of known strikes which the asset needs to be matched.*
     
 **2) If we put this code into production, but found it too slow, or it needed to scale to many more users or more frequent strikes, what are the first things you would think of to speed it up?**
-*[bob] This can be converted to a micro-service and deployed to the cloud in auto-scaling instances behind a load balancer. This way each user request is a separate process that is not dependent on others. If needed, deployment to multiple availability zones can also be looked at as an option to provide performant service in critical locations. Also, assets can be cached so there's no need to fetch them repeatedly. Similarly, the alerts can be put in a distributed store that is synchronized across instances. This ensures reliability that the alerts are not sent repeatedly for a particular asset.*
+*This can be converted to a micro-service and deployed to the cloud in auto-scaling instances behind a load balancer. This way there will be more instances that can receive requests and each request is a separate process that is not dependent on others. If needed, deployment to multiple availability zones can also be looked at as an option to provide performant service in critical locations. Also, assets can be cached so there's no need to fetch them repeatedly. Similarly, the alerts can be put in a distributed store that is synchronized across instances. This ensures reliability that the alerts are not sent repeatedly for a particular asset.*
