@@ -1,11 +1,13 @@
 package com.dtnse.service;
 
+import com.dtnse.exception.InvalidInputException;
 import com.dtnse.model.Asset;
 import com.dtnse.util.AlertPrinter;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static com.dtnse.model.FlashType.CLOUD_TO_GROUND;
@@ -20,19 +22,17 @@ import static org.mockito.Mockito.*;
 class LineProcessorTest
 {
 
+    @InjectMocks
     private LineProcessor processor;
 
     @Mock
     private AssetService service;
 
-    @BeforeEach
-    void setUp()
-    {
-        processor = new LineProcessor(service, new StrikeParser());
-    }
+    @Spy
+    private StrikeParser parser;
 
     @Test
-    void givenValidJsonAndNotHeartbeatAndMatchingAsset_whenProcess_thenPrint()
+    void givenValidJsonAndNotHeartbeatAndMatchingAsset_whenProcess_thenPrint() throws InvalidInputException
     {
         String line = createJsonString(CLOUD_TO_GROUND.code());
         String quadKey = "111";
@@ -42,11 +42,12 @@ class LineProcessorTest
         processor.process(line);
 
         assertTrue(AlertPrinter.isPrinted(quadKey));
+        verify(parser).parse(line);
         verify(service).get(any());
     }
 
     @Test
-    void givenValidJsonAndNotHeartbeatAndNoMatchingAsset_whenProcess_thenDoNotPrint()
+    void givenValidJsonAndNotHeartbeatAndNoMatchingAsset_whenProcess_thenDoNotPrint() throws InvalidInputException
     {
         String line = createJsonString(CLOUD_TO_GROUND.code());
         String quadKey = "111";
@@ -55,17 +56,19 @@ class LineProcessorTest
         processor.process(line);
 
         assertFalse(AlertPrinter.isPrinted(quadKey));
+        verify(parser).parse(line);
         verify(service).get(any());
     }
 
     @Test
-    void givenHeartbeat_whenProcess_thenDoNotPrint()
+    void givenHeartbeat_whenProcess_thenDoNotPrint() throws InvalidInputException
     {
         String line = createJsonString(HEARTBEAT.code());
 
         processor.process(line);
 
         assertFalse(AlertPrinter.isPrinted("111"));
+        verify(parser).parse(line);
         verifyNoInteractions(service);
     }
 
