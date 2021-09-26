@@ -2,11 +2,11 @@
 
 To run:
 
-(Windows)
+(Windows command prompt)
 ```
-gradlew.bat run --args="<json_filename>"
+gradlew run --args="<json_filename>"
 ```
-(OSX/Linux)
+(OSX/Linux terminal, Git Bash)
 ```
 ./gradlew run --args="<json_filename>"
 ```
