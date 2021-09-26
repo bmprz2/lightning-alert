@@ -4,16 +4,22 @@ To run:
 
 (Windows)
 ```
-gradlew.bat run <json_filename>
+gradlew.bat run --args="<json_filename>"
 ```
 (OSX/Linux)
 ```
-./gradlew run <json_filename>
+./gradlew run --args="<json_filename>"
 ```
 
 *json_filename* is an optional argument. This is the name of the json file that will be read by the application.
 
 Application will search for the file in **src/main/resources/input**. Default is *lightning.json*.
+
+Examples:
+```
+./gradlew run
+./gradlew run --args="false-lightning.json"
+```
 
 **Errors handled:**
 * *unable to open file* - File can't be read.
