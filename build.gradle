@@ -3,12 +3,8 @@ plugins {
     id 'application'
 }
 
-//ext {
-//    javaMainClass = "com.dtnse.LightningAlert"
-//}
-
 application {
-    mainClassName = "com.dtnse.LightningAlert"
+    mainClass.set("com.dtnse.LightningAlert")
 }
 
 group 'org.dtnse'
