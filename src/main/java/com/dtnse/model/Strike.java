@@ -20,11 +20,6 @@ public class Strike
         return flashType;
     }
 
-    public long getStrikeTime()
-    {
-        return strikeTime;
-    }
-
     public Double getLatitude()
     {
         return latitude;
@@ -35,46 +30,5 @@ public class Strike
         return longitude;
     }
 
-    public int getPeakAmps()
-    {
-        return peakAmps;
-    }
 
-    public String getReserved()
-    {
-        return reserved;
-    }
-
-    public int getIcHeight()
-    {
-        return icHeight;
-    }
-
-    public long getReceivedTime()
-    {
-        return receivedTime;
-    }
-
-    public int getNumberOfSensors()
-    {
-        return numberOfSensors;
-    }
-
-    public int getMultiplicity()
-    {
-        return multiplicity;
-    }
-
-    //    {
-//        "flashType": 1,
-//            "strikeTime": 1386285909025,
-//            "latitude": 33.5524951,
-//            "longitude": -94.5822016,
-//            "peakAmps": 15815,
-//            "reserved": "000",
-//            "icHeight": 8940,
-//            "receivedTime": 1386285919187,
-//            "numberOfSensors": 17,
-//            "multiplicity": 1
-//    }
 }
