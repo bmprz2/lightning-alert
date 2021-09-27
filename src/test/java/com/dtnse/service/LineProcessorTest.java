@@ -79,10 +79,6 @@ class LineProcessorTest
 
     private Asset createAsset(String quadKey)
     {
-        Asset asset = new Asset();
-        asset.setQuadKey(quadKey);
-        asset.setAssetName("North Park");
-        asset.setAssetOwner("001");
-        return asset;
+        return new Asset("North Park", quadKey, "001");
     }
 }
