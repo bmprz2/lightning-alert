@@ -20,6 +20,11 @@ public class Strike
         return flashType;
     }
 
+    public long getStrikeTime()
+    {
+        return strikeTime;
+    }
+
     public Double getLatitude()
     {
         return latitude;
@@ -30,5 +35,33 @@ public class Strike
         return longitude;
     }
 
+    public int getPeakAmps()
+    {
+        return peakAmps;
+    }
 
+    public String getReserved()
+    {
+        return reserved;
+    }
+
+    public int getIcHeight()
+    {
+        return icHeight;
+    }
+
+    public long getReceivedTime()
+    {
+        return receivedTime;
+    }
+
+    public int getNumberOfSensors()
+    {
+        return numberOfSensors;
+    }
+
+    public int getMultiplicity()
+    {
+        return multiplicity;
+    }
 }
