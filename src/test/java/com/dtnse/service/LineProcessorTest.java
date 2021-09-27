@@ -72,6 +72,19 @@ class LineProcessorTest
         verifyNoInteractions(service);
     }
 
+    @Test
+    void givenInvalidInput_whenProcess_thenWriteErrorMessage() throws InvalidInputException
+    {
+        String line = "{\"flashType\":1,";
+        String quadKey = "111";
+
+        processor.process(line);
+
+        assertFalse(AlertPrinter.isPrinted(quadKey));
+        verify(parser).parse(line);
+        verifyNoInteractions(service);
+    }
+
     private String createJsonString(int flashType)
     {
         return "{\"flashType\":" + flashType + ",\"strikeTime\":1446760902976,\"latitude\":32.9905308,\"longitude\":-98.34038,\"peakAmps\":1700,\"reserved\":\"000\",\"icHeight\":17229,\"receivedTime\":1446760915185,\"numberOfSensors\":14,\"multiplicity\":8}";

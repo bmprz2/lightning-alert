@@ -40,6 +40,16 @@ class StrikeParserTest
     }
 
     @Test
+    void givenJsonWithInvalidJson_whenParse_thenThrowInvalidInputException()
+    {
+        String line = "{\"flashType\":1,}";
+
+        Exception exception = assertThrows(InvalidInputException.class, () -> parser.parse(line));
+
+        assertEquals(InvalidInputException.formatMessage(INVALID_JSON_FORMAT, line), exception.getMessage());
+    }
+
+    @Test
     void givenJsonWithInvalidFlashType_whenParse_thenThrowInvalidInputException()
     {
         String line = "{\"flashType\":2,\"strikeTime\":1446760902510,\"latitude\":8.7020156,\"longitude\":-12.2736188,\"peakAmps\":3034,\"reserved\":\"000\",\"icHeight\":11829,\"receivedTime\":1446760915181,\"numberOfSensors\":6,\"multiplicity\":1}";
